@@ -42,3 +42,37 @@ textBlockOrRichString.Paint(canvas, new SKPaint(100,100), options);
 
 [T:Topten.RichTextKit.TextPaintOptions] also has settings to control anti-aliasing and LCD text rendering.
 
+### RGB Subpixel Rendering
+
+For improved text clarity on LCD screens, you can enable RGB subpixel rendering. This requires two steps:
+
+**1. Create your canvas surface with the appropriate pixel geometry:**
+
+~~~csharp
+// Create surface with RGB horizontal pixel geometry (most common for LCDs)
+var surfaceProps = new SKSurfaceProps(SKPixelGeometry.RgbHorizontal);
+var imageInfo = new SKImageInfo(width, height);
+var surface = SKSurface.Create(imageInfo, surfaceProps);
+var canvas = surface.Canvas;
+~~~
+
+**2. Configure TextPaintOptions to use subpixel antialiasing:**
+
+~~~csharp
+var options = new TextPaintOptions()
+{
+    Edging = SKFontEdging.SubpixelAntialias,
+    PixelGeometry = SKPixelGeometry.RgbHorizontal  // Should match surface properties
+}
+
+textBlockOrRichString.Paint(canvas, new SKPoint(100,100), options);
+~~~
+
+The `PixelGeometry` property specifies how RGB subpixels are physically arranged on the display:
+- `RgbHorizontal`: Red, Green, Blue arranged horizontally (most common for LCDs)
+- `BgrHorizontal`: Blue, Green, Red arranged horizontally
+- `RgbVertical`: Red, Green, Blue arranged vertically
+- `BgrVertical`: Blue, Green, Red arranged vertically
+
+For best results, the PixelGeometry in TextPaintOptions should match the SKSurfaceProps used when creating the canvas surface.
+

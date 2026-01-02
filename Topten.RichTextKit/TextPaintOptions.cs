@@ -131,6 +131,31 @@ namespace Topten.RichTextKit
         } = SKFontHinting.Normal;
 
         /// <summary>
+        /// Specifies the expected pixel geometry for RGB subpixel rendering.
+        /// </summary>
+        /// <remarks>
+        /// This property documents the expected physical layout of RGB subpixels when using
+        /// subpixel antialiasing (i.e., when Edging is set to SKFontEdging.SubpixelAntialias).
+        /// The pixel geometry determines how subpixels are arranged (RGB horizontal, BGR horizontal, etc.).
+        /// 
+        /// Note: The pixel geometry is determined by the SKSurfaceProps used when creating the canvas surface.
+        /// This property serves as documentation for what pixel geometry configuration is expected for optimal
+        /// rendering quality. To achieve the best subpixel rendering results, ensure your canvas surface is 
+        /// created with SKSurfaceProps that match this pixel geometry setting.
+        /// 
+        /// For surfaces where pixel geometry can be set, create them like this:
+        /// <code>
+        /// var surfaceProps = new SKSurfaceProps(SKPixelGeometry.RgbHorizontal);
+        /// var surface = SKSurface.Create(info, surfaceProps);
+        /// </code>
+        /// </remarks>
+        public SKPixelGeometry PixelGeometry
+        {
+            get;
+            set;
+        } = SKPixelGeometry.Unknown;
+
+        /// <summary>
         /// A gradient used when rendering text
         /// </summary>
         public TextGradient TextGradient

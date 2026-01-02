@@ -10,4 +10,5 @@ build
 *.userprefs
 *.bin
 .idea
-packages
+packagesBuild/
+buildtools/

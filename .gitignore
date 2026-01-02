@@ -3,6 +3,8 @@
 bin
 obj
 build
+Build/
+buildtools/
 *.suo
 *.vsp
 *.psess
@@ -10,5 +12,4 @@ build
 *.userprefs
 *.bin
 .idea
-packagesBuild/
-buildtools/
+packages
